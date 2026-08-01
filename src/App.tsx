@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { SearchModal } from './components/SearchModal';
 import { AdminSidebar } from './components/AdminSidebar';
+import { ChatBot } from './components/ChatBot';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -218,6 +219,9 @@ function MainLayout() {
       )}
 
       {!isOperatorPortal && <Footer setActiveTab={setActiveTab} />}
+
+      {/* AI Chatbot – always visible on public pages */}
+      {!isOperatorPortal && <ChatBot />}
 
       {/* Global Booking Slide-over Drawer */}
       <BookingModal
