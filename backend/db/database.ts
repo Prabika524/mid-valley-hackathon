@@ -474,6 +474,39 @@ function initData(): DBData {
     ],
     hiddenGems: [
       {
+        id: 'lateshwor-mahadev',
+        name: 'Lateshwor Mahadev Temple',
+        subtitle: 'Sacred Hilltop Shrine & Himalayan Panorama',
+        description: 'Perched high above the valley with breathtaking panoramic views of the Langtang and Ganesh Himal ranges, Lateshwor Mahadev is an ancient sacred pilgrimage shrine.',
+        imageUrl: '/lateshwor.jpg',
+        location: 'Bhaktapur Ridge / Nagarkot Trail',
+        highlight: 'Panoramic Himalayan Views',
+        status: 'Approved',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'chitlang',
+        name: 'Chitlang Organic Valley',
+        subtitle: 'Ancient Trade Route & Pear Gardens',
+        description: 'An ancient historical village along the old India-Tibet trade route, famous for its lush pear orchards, Nepal’s first goat cheese factory, and serene Indra Sarovar lake.',
+        imageUrl: '/chitlang.jpg',
+        location: 'Makwanpur (3hrs from Kathmandu)',
+        highlight: 'Organic Farming & Goat Cheese',
+        status: 'Approved',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'lapchi-dolakha',
+        name: 'Lapchi Sacred Monastery (Dolakha)',
+        subtitle: 'Milarepa Meditation Caves & Remote Sanctuary',
+        description: 'Tucked away in remote Dolakha near the Tibetan border, Lapchi is a legendary sacred Buddhist pilgrimage site renowned for Milarepa’s ancient meditation caves.',
+        imageUrl: '/lapchi.jpg',
+        location: 'Dolakha Region (Northern Border)',
+        highlight: 'Sacred Milarepa Caves',
+        status: 'Approved',
+        createdAt: new Date().toISOString()
+      },
+      {
         id: 'panauti',
         name: 'Panauti Historical Town',
         subtitle: 'Ancient Confluence & Newari Timber Craft',
