@@ -33,6 +33,7 @@ export interface TourPackage {
   durationDays: number;
   maxGroupSize: number;
   includedSiteCount: number;
+  includedSites?: string[];
   includesGuide: boolean;
   guideTier: 'budget' | 'standard' | 'expert' | 'none';
   features: string[];

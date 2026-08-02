@@ -9,6 +9,7 @@ interface HomeFestival {
   startDay: number; endDay?: number;
   location: string; isNationwide: boolean;
   category: string; description: string; experience: string;
+  imageUrl?: string;
 }
 
 const HOME_FESTIVALS: HomeFestival[] = [
@@ -16,32 +17,38 @@ const HOME_FESTIVALS: HomeFestival[] = [
     location:'Kathmandu Durbar Square', isNationwide:false,
     category:'Living Goddess Chariot Procession',
     description:'The largest street festival in Kathmandu. Features the public chariot procession of the Living Goddess Kumari, masked Lakhey dancers, and oil lamps lit across the old city.',
-    experience:'Standing in Kathmandu Durbar Square as the Kumari\'s golden chariot passes by is something tourists rarely forget. Arrive before 14:00 for a good spot.' },
+    experience:'Standing in Kathmandu Durbar Square as the Kumari\'s golden chariot passes by is something tourists rarely forget. Arrive before 14:00 for a good spot.',
+    imageUrl: '/festivals/page_14_img_1.jpeg' },
   { id:'dashain', name:'Bada Dashain', month:9, year:2026, startDay:18, endDay:28,
     location:'Nationwide', isNationwide:true,
     category:'Victory of Good over Evil',
     description:'Nepal\'s grandest 15-day festival. Families gather from across the world, elders give tika and jamara blessings, bamboo swings are erected, and kites fill the sky.',
-    experience:'Receiving tika from elders on Vijaya Dashami is the heart of the festival. The sight of kites filling the sky over Kathmandu is unforgettable.' },
+    experience:'Receiving tika from elders on Vijaya Dashami is the heart of the festival. The sight of kites filling the sky over Kathmandu is unforgettable.',
+    imageUrl: '/festivals/page_16_img_1.jpeg' },
   { id:'tihar', name:'Tihar & Mha Puja', month:10, year:2026, startDay:8, endDay:12,
     location:'Nationwide & Newar Households', isNationwide:true,
     category:'Festival of Lights',
     description:'A 5-day festival of lights honoring crows, dogs, cows, and Laxmi. Colorful Rangoli mandalas, oil lamps on every window, and Deusi-Bhailo singing fill the nights.',
-    experience:'Kathmandu Valley at night during Tihar is magical — every street glows with butter lamps and the air rings with song.' },
+    experience:'Kathmandu Valley at night during Tihar is magical — every street glows with butter lamps and the air rings with song.',
+    imageUrl: '/festivals/page_17_img_1.jpeg' },
   { id:'chhath', name:'Chhath Puja', month:10, year:2026, startDay:14,
     location:'Riverbanks of Terai', isNationwide:false,
     category:'Sun Worship Festival',
     description:'Devotees fast for 36 hours and offer prayers to the setting and rising sun, standing in rivers at dusk and dawn in a profoundly moving act of devotion.',
-    experience:'Thousands of sari-clad women standing in the river at dawn with hands raised toward the rising sun — one of Nepal\'s most spiritually powerful sights.' },
+    experience:'Thousands of sari-clad women standing in the river at dawn with hands raised toward the rising sun — one of Nepal\'s most spiritually powerful sights.',
+    imageUrl: '/festivals/page_18_img_1.jpeg' },
   { id:'maha-shivaratri', name:'Maha Shivaratri', month:1, year:2027, startDay:26,
     location:'Pashupatinath Temple, Nationwide', isNationwide:true,
     category:'Great Night of Shiva',
     description:'Over a million devotees descend on Pashupatinath. Ash-covered Sadhus from across the subcontinent gather, bonfires burn all night, and the air is thick with devotion.',
-    experience:'Hundreds of Sadhus with dreadlocks, tridents, and sacred fires at Pashupatinath makes this unlike any other festival in the world.' },
+    experience:'Hundreds of Sadhus with dreadlocks, tridents, and sacred fires at Pashupatinath makes this unlike any other festival in the world.',
+    imageUrl: '/festivals/page_28_img_1.jpeg' },
   { id:'holi', name:'Holi (Fagu Purnima)', month:2, year:2027, startDay:3,
     location:'Nationwide', isNationwide:true,
     category:'Festival of Colors',
     description:'The famous festival of colors celebrating the arrival of spring. Streets become a riot of colored powder and water, with Kathmandu celebrating a day before the Terai.',
-    experience:'Basantapur Durbar Square on Holi morning — thousands drenching each other in color against ancient temple backdrops — is pure, joyful chaos.' },
+    experience:'Basantapur Durbar Square on Holi morning — thousands drenching each other in color against ancient temple backdrops — is pure, joyful chaos.',
+    imageUrl: '/festivals/page_29_img_1.jpeg' },
 ];
 
 const MONTH_NAMES_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -66,7 +73,7 @@ interface HomeFestivalCalendarProps { setActiveTab: (tab: string) => void; }
 const HomeFestivalCalendar: React.FC<HomeFestivalCalendarProps> = ({ setActiveTab }) => {
   const [currentMonth, setCurrentMonth] = useState(8); // Sep 2026
   const [currentYear, setCurrentYear] = useState(2026);
-  const [selected, setSelected] = useState<HomeFestival | null>(null);
+  const [selected, setSelected] = useState<HomeFestival | null>(HOME_FESTIVALS[0]);
 
   const daysInMonth = getDaysInMonth(currentMonth, currentYear);
   const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
@@ -169,51 +176,64 @@ const HomeFestivalCalendar: React.FC<HomeFestivalCalendarProps> = ({ setActiveTa
           {/* Event Detail */}
           <div className="flex-1">
             {selected ? (
-              <div className="glass-panel rounded-3xl border border-white/10 shadow-xl p-6 md:p-8 h-full flex flex-col gap-5">
-                <div className="flex items-start gap-3">
-                  <div className="shrink-0 glass rounded-2xl px-3 py-2 border border-amber-400/30 text-center min-w-[52px]">
-                    <p className="font-serif-headline text-xl font-bold text-amber-300 leading-none">{selected.startDay}</p>
-                    <p className="font-sans-body text-[10px] text-slate-400 uppercase">{MONTH_NAMES_SHORT[selected.month]}</p>
-                  </div>
-                  <div>
-                    <span className="font-sans-body text-[10px] font-bold text-cyan-400 uppercase tracking-widest">{selected.category}</span>
-                    <h3 className="font-serif-headline text-2xl font-bold text-white leading-tight">{selected.name}</h3>
-                  </div>
-                </div>
+              <div className="glass-panel rounded-3xl border border-white/10 shadow-2xl p-6 md:p-8 h-full flex flex-col gap-5 relative overflow-hidden group">
+                {/* Background festival image if available */}
+                {selected.imageUrl && (
+                  <>
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style={{ backgroundImage: `url(${selected.imageUrl})` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-slate-900/75 backdrop-blur-[2px]" />
+                  </>
+                )}
 
-                <div className="flex flex-wrap gap-3 text-xs font-sans-body">
-                  <span className="flex items-center gap-1 text-slate-300">
-                    <span className="material-symbols-outlined text-sm text-cyan-400">location_on</span>
-                    {selected.isNationwide ? 'Celebrated all over Nepal' : selected.location}
-                  </span>
-                  {selected.endDay && (
+                <div className="relative z-10 flex flex-col gap-5 h-full">
+                  <div className="flex items-start gap-3">
+                    <div className="shrink-0 glass rounded-2xl px-3 py-2 border border-amber-400/30 text-center min-w-[52px]">
+                      <p className="font-serif-headline text-xl font-bold text-amber-300 leading-none">{selected.startDay}</p>
+                      <p className="font-sans-body text-[10px] text-slate-400 uppercase">{MONTH_NAMES_SHORT[selected.month]}</p>
+                    </div>
+                    <div>
+                      <span className="font-sans-body text-[10px] font-bold text-cyan-400 uppercase tracking-widest">{selected.category}</span>
+                      <h3 className="font-serif-headline text-2xl font-bold text-white leading-tight">{selected.name}</h3>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 text-xs font-sans-body">
                     <span className="flex items-center gap-1 text-slate-300">
-                      <span className="material-symbols-outlined text-sm text-cyan-400">date_range</span>
-                      {MONTH_NAMES_SHORT[selected.month]} {selected.startDay}–{selected.endDay}, {selected.year}
+                      <span className="material-symbols-outlined text-sm text-cyan-400">location_on</span>
+                      {selected.isNationwide ? 'Celebrated all over Nepal' : selected.location}
                     </span>
-                  )}
-                  <span className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${selected.isNationwide ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30' : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'}`}>
-                    {selected.isNationwide ? '🇳🇵 Nationwide' : '📍 Specific Location'}
-                  </span>
+                    {selected.endDay && (
+                      <span className="flex items-center gap-1 text-slate-300">
+                        <span className="material-symbols-outlined text-sm text-cyan-400">date_range</span>
+                        {MONTH_NAMES_SHORT[selected.month]} {selected.startDay}–{selected.endDay}, {selected.year}
+                      </span>
+                    )}
+                    <span className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${selected.isNationwide ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30' : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'}`}>
+                      {selected.isNationwide ? '🇳🇵 Nationwide' : '📍 Specific Location'}
+                    </span>
+                  </div>
+
+                  <div className="carved-line opacity-20" />
+
+                  <p className="font-sans-body text-sm text-slate-200 leading-relaxed flex-1">{selected.description}</p>
+
+                  <div className="glass rounded-2xl p-4 border border-cyan-400/20 backdrop-blur-md bg-slate-900/40">
+                    <p className="font-sans-body text-xs font-bold text-cyan-400 mb-1.5 flex items-center gap-1">
+                      <span className="material-symbols-outlined text-sm">star</span>
+                      What you'll experience
+                    </p>
+                    <p className="font-sans-body text-xs text-slate-200 leading-relaxed">{selected.experience}</p>
+                  </div>
+
+                  <button onClick={() => setActiveTab('calendar')}
+                    className="glass-button-cyan self-start px-5 py-2.5 rounded-xl font-sans-body text-xs font-bold transition-all shadow-md cursor-pointer flex items-center gap-2">
+                    <span>See All Festivals</span>
+                    <span className="material-symbols-outlined text-base">calendar_month</span>
+                  </button>
                 </div>
-
-                <div className="carved-line opacity-20" />
-
-                <p className="font-sans-body text-sm text-slate-300 leading-relaxed flex-1">{selected.description}</p>
-
-                <div className="glass rounded-2xl p-4 border border-cyan-400/20">
-                  <p className="font-sans-body text-xs font-bold text-cyan-400 mb-1.5 flex items-center gap-1">
-                    <span className="material-symbols-outlined text-sm">star</span>
-                    What you'll experience
-                  </p>
-                  <p className="font-sans-body text-xs text-slate-300 leading-relaxed">{selected.experience}</p>
-                </div>
-
-                <button onClick={() => setActiveTab('calendar')}
-                  className="glass-button-cyan self-start px-5 py-2.5 rounded-xl font-sans-body text-xs font-bold transition-all shadow-md cursor-pointer flex items-center gap-2">
-                  <span>See All Festivals</span>
-                  <span className="material-symbols-outlined text-base">calendar_month</span>
-                </button>
               </div>
             ) : (
               <div className="glass-panel rounded-3xl border border-white/10 shadow-xl p-8 h-full flex flex-col items-center justify-center text-center min-h-[280px] gap-4">

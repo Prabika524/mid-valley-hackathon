@@ -148,7 +148,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               {travelerType === 'researcher' && (
                 <div className="mt-2 p-2.5 rounded-xl bg-violet-500/10 border border-violet-400/25 flex items-start gap-2">
                   <span className="material-symbols-outlined text-violet-400 text-sm mt-0.5">info</span>
-                  <p className="font-sans-body text-[11px] text-violet-300">Academic access includes restricted zones. Please bring your institution ID on the day of visit.</p>
+                  <p className="font-sans-body text-[11px] text-violet-300">Academic access included. Please bring your institution ID on the day of visit.</p>
                 </div>
               )}
             </div>

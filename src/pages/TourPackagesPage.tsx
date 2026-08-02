@@ -11,10 +11,104 @@ const GUIDES: Guide[] = [
 ];
 
 const PACKAGES: TourPackage[] = [
-  { id: "pkg-solo", name: "Solo Explorer", tagline: "Discover Nepal on your own terms — affordable, flexible, authentic.", targetType: "solo", priceUSD: 79, durationDays: 3, maxGroupSize: 1, includedSiteCount: 3, includesGuide: true, guideTier: "budget", colorScheme: "cyan", highlightBadge: "Most Affordable", features: ["Entry to 3 verified heritage sites", "Budget-tier licensed guide (1 day)", "Digital e-ticket with QR code", "UNESCO site etiquette guide", "Emergency helpline access"] },
-  { id: "pkg-cultural", name: "Cultural Immersion", tagline: "The full Nepal experience — temple rituals, local cuisine, expert storytelling.", targetType: "group", priceUSD: 249, durationDays: 7, maxGroupSize: 8, includedSiteCount: 7, includesGuide: true, guideTier: "standard", colorScheme: "gold", popularLabel: "Most Popular", features: ["Entry to 7 premium heritage sites", "Standard-tier cultural guide (3 days)", "Festival calendar integration", "Local restaurant & hotel recommendations", "Transport coordination assistance", "Group photo stops at key monuments"] },
-  { id: "pkg-premium", name: "Premium Heritage", tagline: "Exclusive access, expert guides, and curated luxury for the discerning traveler.", targetType: "all", priceUSD: 499, durationDays: 10, maxGroupSize: 6, includedSiteCount: 12, includesGuide: true, guideTier: "expert", colorScheme: "violet", highlightBadge: "All Inclusive", features: ["All 12 verified UNESCO heritage sites", "Expert-tier guide (full duration)", "After-hours exclusive site access", "Curated hotel & fine dining bookings", "Private vehicle transfers", "Puja ceremony participation", "Priority booking & concierge support"] },
-  { id: "pkg-research", name: "Research Scholar", tagline: "Academic access to restricted sites, archives, and expert archaeological guides.", targetType: "researcher", priceUSD: 349, durationDays: 5, maxGroupSize: 4, includedSiteCount: 8, includesGuide: true, guideTier: "expert", colorScheme: "emerald", highlightBadge: "Scholars Only", features: ["Access to 8 sites including restricted zones", "PhD-level archaeological guide", "Coordination with Dept. of Archaeology", "Photography & documentation permits", "Access to on-site artifact records", "Academic institution letter of support"] },
+  {
+    id: "pkg-solo",
+    name: "Solo Explorer",
+    tagline: "Discover Nepal on your own terms — affordable, flexible, authentic.",
+    targetType: "solo",
+    priceUSD: 79,
+    durationDays: 3,
+    maxGroupSize: 1,
+    includedSiteCount: 3,
+    includedSites: [
+      "Pashupatinath Temple",
+      "Boudhanath Stupa",
+      "Swayambhunath Stupa"
+    ],
+    includesGuide: true,
+    guideTier: "budget",
+    colorScheme: "cyan",
+    highlightBadge: "Most Affordable",
+    features: ["Entry to 3 verified heritage sites", "Budget-tier licensed guide (1 day)", "Digital e-ticket with QR code", "UNESCO site etiquette guide", "Emergency helpline access"]
+  },
+  {
+    id: "pkg-cultural",
+    name: "Cultural Immersion",
+    tagline: "The full Nepal experience — temple rituals, local cuisine, expert storytelling.",
+    targetType: "group",
+    priceUSD: 249,
+    durationDays: 7,
+    maxGroupSize: 8,
+    includedSiteCount: 7,
+    includedSites: [
+      "Pashupatinath Temple",
+      "Boudhanath Stupa",
+      "Swayambhunath Stupa",
+      "Patan Durbar Square",
+      "Bhaktapur Durbar Square",
+      "Changu Narayan Temple",
+      "Lumbini Sacred Garden"
+    ],
+    includesGuide: true,
+    guideTier: "standard",
+    colorScheme: "gold",
+    popularLabel: "Most Popular",
+    features: ["Entry to 7 premium heritage sites", "Standard-tier cultural guide (3 days)", "Festival calendar integration", "Local restaurant & hotel recommendations", "Transport coordination assistance", "Group photo stops at key monuments"]
+  },
+  {
+    id: "pkg-premium",
+    name: "Premium Heritage",
+    tagline: "Exclusive access, expert guides, and curated luxury for the discerning traveler.",
+    targetType: "all",
+    priceUSD: 499,
+    durationDays: 10,
+    maxGroupSize: 6,
+    includedSiteCount: 12,
+    includedSites: [
+      "Pashupatinath Temple",
+      "Boudhanath Stupa",
+      "Swayambhunath Stupa",
+      "Patan Durbar Square",
+      "Bhaktapur Durbar Square",
+      "Changu Narayan Temple",
+      "Lumbini Sacred Garden",
+      "Chitwan National Park",
+      "Sagarmatha National Park",
+      "Janaki Mandir (Janakpur)",
+      "Muktinath Temple",
+      "Gosaikunda Holy Lake"
+    ],
+    includesGuide: true,
+    guideTier: "expert",
+    colorScheme: "violet",
+    highlightBadge: "All Inclusive",
+    features: ["All 12 verified UNESCO heritage sites", "Expert-tier guide (full duration)", "After-hours exclusive site access", "Curated hotel & fine dining bookings", "Private vehicle transfers", "Puja ceremony participation", "Priority booking & concierge support"]
+  },
+  {
+    id: "pkg-research",
+    name: "Research Scholar",
+    tagline: "Academic access to archives, historical sites, and expert archaeological guides.",
+    targetType: "researcher",
+    priceUSD: 349,
+    durationDays: 5,
+    maxGroupSize: 4,
+    includedSiteCount: 8,
+    includedSites: [
+      "Pashupatinath Temple Archives",
+      "Boudhanath Stupa",
+      "Swayambhunath Stupa",
+      "Patan Durbar Square Museum",
+      "Bhaktapur Art Gallery & Durbar",
+      "Changu Narayan Inscriptions",
+      "Lumbini Archaeological Site",
+      "National Archives of Nepal"
+    ],
+    includesGuide: true,
+    guideTier: "expert",
+    colorScheme: "emerald",
+    highlightBadge: "Scholars Only",
+    features: ["Access to 8 sites", "PhD-level archaeological guide", "Coordination with Dept. of Archaeology", "Photography & documentation permits", "Access to on-site artifact records", "Academic institution letter of support"]
+  },
 ];
 
 const SCHEME: Record<string, { badge: string; glow: string; border: string; accent: string; iconBg: string; iconText: string; barColor: string }> = {
@@ -64,10 +158,10 @@ const GuideCard: React.FC<{ guide: Guide; onSelect?: (g: Guide) => void; selecte
 const PackageCard: React.FC<{ pkg: TourPackage; selected: boolean; onSelect: (p: TourPackage) => void }> = ({ pkg, selected, onSelect }) => {
   const s = SCHEME[pkg.colorScheme];
   return (
-    <div onClick={() => onSelect(pkg)} className={`glass-card rounded-3xl overflow-hidden border transition-all duration-300 cursor-pointer group relative ${selected ? `${s.border} ${s.glow} scale-[1.02]` : `border-white/10 hover:${s.border} hover:${s.glow}`}`}>
+    <div onClick={() => onSelect(pkg)} className={`glass-card rounded-3xl border transition-all duration-300 cursor-pointer group relative ${selected ? `${s.border} ${s.glow} scale-[1.02]` : `border-white/10 hover:${s.border} hover:${s.glow}`}`}>
       {pkg.popularLabel && <div className={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-[11px] font-bold border ${s.badge}`}>⭐ {pkg.popularLabel}</div>}
       {pkg.highlightBadge && !pkg.popularLabel && <div className={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-[11px] font-bold border ${s.badge}`}>{pkg.highlightBadge}</div>}
-      <div className="h-1.5 w-full" style={{ background: `linear-gradient(90deg,${s.barColor},transparent)` }} />
+      <div className="h-1.5 w-full rounded-t-3xl overflow-hidden" style={{ background: `linear-gradient(90deg,${s.barColor},transparent)` }} />
       <div className="p-6">
         <div className="mb-3">
           <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full border ${s.badge}`}>
@@ -77,20 +171,64 @@ const PackageCard: React.FC<{ pkg: TourPackage; selected: boolean; onSelect: (p:
         <h3 className="font-cinzel text-xl font-bold text-white mb-1">{pkg.name}</h3>
         <p className="font-sans-body text-xs text-slate-400 mb-4 leading-relaxed">{pkg.tagline}</p>
         <div className="grid grid-cols-4 gap-2 mb-4">
-          {[{ label: "Days", value: `${pkg.durationDays}` }, { label: "Sites", value: `${pkg.includedSiteCount}` }, { label: "Max Pax", value: `${pkg.maxGroupSize}` }, { label: "Guide", value: TIER_LABEL[pkg.guideTier].split(" ")[0] }].map((stat) => (
-            <div key={stat.label} className={`text-center p-2 rounded-xl ${s.iconBg}`}>
-              <p className={`font-cinzel text-sm font-bold ${s.accent}`}>{stat.value}</p>
-              <p className="font-sans-body text-[10px] text-slate-500">{stat.label}</p>
-            </div>
-          ))}
+          {[{ label: "Days", value: `${pkg.durationDays}` }, { label: "Sites", value: `${pkg.includedSiteCount}` }, { label: "Max Pax", value: `${pkg.maxGroupSize}` }, { label: "Guide", value: TIER_LABEL[pkg.guideTier].split(" ")[0] }].map((stat) => {
+            const isSiteStat = stat.label === "Sites";
+            return (
+              <div key={stat.label} className={`text-center p-2 rounded-xl ${s.iconBg} ${isSiteStat ? "relative group/sitestat cursor-pointer" : ""}`}>
+                <p className={`font-cinzel text-sm font-bold ${s.accent}`}>{stat.value}</p>
+                <p className="font-sans-body text-[10px] text-slate-500">{stat.label}</p>
+
+                {isSiteStat && pkg.includedSites && (
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover/sitestat:block w-64 p-3 bg-slate-900/95 border border-amber-400/40 rounded-xl shadow-2xl z-50 text-left backdrop-blur-md pointer-events-none">
+                    <div className="flex items-center gap-1.5 border-b border-white/10 pb-1.5 mb-2">
+                      <span className="material-symbols-outlined text-amber-400 text-sm">location_on</span>
+                      <span className="font-outfit text-xs font-bold text-amber-300">Included Sites ({pkg.includedSites.length})</span>
+                    </div>
+                    <ul className="space-y-1 max-h-48 overflow-y-auto">
+                      {pkg.includedSites.map((site, i) => (
+                        <li key={i} className="font-sans-body text-[11px] text-slate-200 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: s.barColor }}></span>
+                          <span>{site}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
         <ul className="space-y-1.5 mb-5">
-          {pkg.features.map((feat) => (
-            <li key={feat} className="flex items-start gap-2">
-              <span className={`material-symbols-outlined text-sm mt-0.5 shrink-0 ${s.iconText}`}>check_circle</span>
-              <span className="font-sans-body text-xs text-slate-300">{feat}</span>
-            </li>
-          ))}
+          {pkg.features.map((feat) => {
+            const isSiteFeat = feat.toLowerCase().includes("site");
+            return (
+              <li key={feat} className={`flex items-start gap-2 ${isSiteFeat ? "relative group/sitefeat cursor-pointer" : ""}`}>
+                <span className={`material-symbols-outlined text-sm mt-0.5 shrink-0 ${s.iconText}`}>
+                  {isSiteFeat ? "location_on" : "check_circle"}
+                </span>
+                <span className={`font-sans-body text-xs ${isSiteFeat ? "text-slate-200 underline decoration-dotted underline-offset-4 group-hover/sitefeat:text-amber-300 transition-colors" : "text-slate-300"}`}>
+                  {feat} {isSiteFeat && <span className="text-[10px] text-amber-400/80 ml-1 font-semibold">(hover to view sites)</span>}
+                </span>
+
+                {isSiteFeat && pkg.includedSites && (
+                  <div className="absolute left-0 bottom-full mb-2 hidden group-hover/sitefeat:block w-64 p-3 bg-slate-900/95 border border-amber-400/40 rounded-xl shadow-2xl z-50 text-left backdrop-blur-md pointer-events-none">
+                    <div className="flex items-center gap-1.5 border-b border-white/10 pb-1.5 mb-2">
+                      <span className="material-symbols-outlined text-amber-400 text-sm">map</span>
+                      <span className="font-outfit text-xs font-bold text-amber-300">Included Sites ({pkg.includedSites.length})</span>
+                    </div>
+                    <ul className="space-y-1 max-h-48 overflow-y-auto">
+                      {pkg.includedSites.map((site, i) => (
+                        <li key={i} className="font-sans-body text-[11px] text-slate-200 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: s.barColor }}></span>
+                          <span>{site}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            );
+          })}
         </ul>
         <div className="flex items-center justify-between pt-4 border-t border-white/10">
           <div>
