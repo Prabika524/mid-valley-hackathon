@@ -27,6 +27,17 @@
       "passwordHash": "$2b$10$7UUA872B7cV8ancIxmAUQOsxvpklWrK3WniI6efLmvmeDUDlDiPp.",
       "role": "user",
       "createdAt": "2026-07-30T04:56:28.022Z"
+    },
+    {
+      "name": "Sita Maharjan",
+      "email": "sita@heritagewalkspatan.np",
+      "passwordHash": "$2b$10$Op5/gIzBsLyLLeyTbpmGNeBIZgfGLpSeu4z3oPDVp78YScRR09KZG",
+      "role": "operator",
+      "companyName": "Heritage Walks Patan",
+      "licenseNumber": "#NHT-2024-102",
+      "phone": "+977 9801122334",
+      "id": "usr_178564041687760j0",
+      "createdAt": "2026-08-02T03:13:36.877Z"
     }
   ],
   "sites": [
@@ -208,6 +219,44 @@
   ],
   "bookings": [
     {
+      "clientName": "cat cherry",
+      "email": "cat1@gmail.com",
+      "phone": "",
+      "passportNumber": "12345",
+      "nationality": "SAARC Member",
+      "siteId": "pashupatinath",
+      "siteName": "Pashupatinath Temple",
+      "visitDate": "2026-08-03",
+      "guests": 1,
+      "totalPriceUSD": 15,
+      "paymentMethod": "Card",
+      "status": "Confirmed",
+      "entryGate": "Main Gate Entrance",
+      "ticketType": "Standard Entry (1 Guest)",
+      "commissionUSD": 2.25,
+      "id": "BK-7983",
+      "createdAt": "2026-08-02T03:12:42.355Z"
+    },
+    {
+      "clientName": "dev",
+      "email": "dev@gmail.com",
+      "phone": "",
+      "passportNumber": "123456",
+      "nationality": "Foreign National",
+      "siteId": "pashupatinath",
+      "siteName": "Pashupatinath Temple",
+      "visitDate": "2026-08-03",
+      "guests": 1,
+      "totalPriceUSD": 15,
+      "paymentMethod": "Card",
+      "status": "Confirmed",
+      "entryGate": "Main Gate Entrance",
+      "ticketType": "Standard Entry (1 Guest)",
+      "commissionUSD": 2.25,
+      "id": "BK-7826",
+      "createdAt": "2026-08-02T03:10:14.345Z"
+    },
+    {
       "clientName": "aman",
       "email": "aman@gmail.com",
       "phone": "",
@@ -357,7 +406,7 @@
       "phone": "+977 9801122334",
       "officeAddress": "Mangal Bazaar, Lalitpur",
       "documentName": "patan_walks_auth.pdf",
-      "status": "Pending",
+      "status": "Approved",
       "createdAt": "2026-07-30T04:56:28.022Z"
     },
     {
@@ -374,6 +423,22 @@
     }
   ],
   "activities": [
+    {
+      "id": "act_1785640362355",
+      "title": "Pashupatinath Temple Visit",
+      "operator": "cat cherry",
+      "status": "Confirmed",
+      "timeAgo": "Just now",
+      "type": "heritage"
+    },
+    {
+      "id": "act_1785640214345",
+      "title": "Pashupatinath Temple Visit",
+      "operator": "dev",
+      "status": "Confirmed",
+      "timeAgo": "Just now",
+      "type": "heritage"
+    },
     {
       "id": "act_1785638667911",
       "title": "Pashupatinath Temple Visit",
