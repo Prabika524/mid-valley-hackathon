@@ -56,6 +56,31 @@ For text questions about Nepal, provide accurate, enthusiastic information cover
 
 Always keep responses warm, concise, and informative. Use emojis sparingly for personality. If a question is completely unrelated to Nepal, gently steer the conversation back.`;
 
+function cleanGroqReply(raw: string): string {
+  if (!raw || !raw.trim()) return 'No response received.';
+  let cleaned = raw.trim();
+
+  // 1. If </think> tag exists and has text after it, return that post-think answer
+  if (cleaned.includes('</think>')) {
+    const parts = cleaned.split('</think>');
+    const postThink = parts[parts.length - 1].trim();
+    if (postThink.length > 10) {
+      return postThink;
+    }
+  }
+
+  // 2. If response ended inside <think> due to token limit, strip <think> / </think> tags
+  cleaned = cleaned.replace(/<\/?think>/gi, '').trim();
+
+  // 3. Extract key section if present (e.g. Identity, Conclusion, Visuals, Heritage)
+  const summaryMatch = cleaned.match(/(?:Identity|Conclusion|Summary|Description|Visuals|Heritage|Location):[\s\S]+/i);
+  if (summaryMatch && summaryMatch[0].length > 30) {
+    return summaryMatch[0].trim();
+  }
+
+  return cleaned;
+}
+
 async function callGroqAPI(
   messages: { role: string; content: string | GroqContentPart[] }[],
   apiKey: string,
@@ -71,7 +96,7 @@ async function callGroqAPI(
     body: JSON.stringify({
       model,
       messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
-      max_tokens: 1024,
+      max_tokens: hasImage ? 2048 : 1024,
       temperature: 0.7,
     }),
   });
@@ -88,10 +113,7 @@ async function callGroqAPI(
     choices: { message: { content: string } }[];
   };
   const reply = data.choices[0]?.message?.content ?? 'No response received.';
-  return reply
-    .replace(/<think>[\s\S]*?<\/think>/g, '')
-    .replace(/<think>[\s\S]*/g, '')
-    .trim();
+  return cleanGroqReply(reply);
 }
 
 // Compress and resize image to fit within token limits
