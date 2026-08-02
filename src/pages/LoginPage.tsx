@@ -73,22 +73,30 @@ export const LoginPage: React.FC<LoginPageProps> = ({
           <div className="font-sans-body text-[10px] font-bold text-cyan-400 uppercase tracking-wider text-center">
             Demo Accounts (Click to Auto-login)
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-1.5">
             <button
               type="button"
-              onClick={() => handleDemoLogin('admin@heritage.np', 'admin123')}
-              className="py-2 px-3 glass hover:bg-white/10 border border-white/10 rounded-xl text-left text-xs font-sans-body transition-all cursor-pointer"
+              onClick={() => handleDemoLogin('sarah.jenkins@example.com', 'user123')}
+              className="py-2 px-2.5 glass hover:bg-white/10 border border-emerald-400/30 rounded-xl text-left text-xs font-sans-body transition-all cursor-pointer bg-emerald-500/10"
             >
-              <div className="font-bold text-cyan-300 text-xs">Admin Account</div>
-              <div className="text-slate-400 text-[10px]">admin@heritage.np</div>
+              <div className="font-bold text-emerald-300 text-xs truncate">🧳 Tourist</div>
+              <div className="text-slate-400 text-[9px] truncate">sarah.jenkins@...</div>
             </button>
             <button
               type="button"
               onClick={() => handleDemoLogin('pemba@everesthightreks.np', 'operator123')}
-              className="py-2 px-3 glass hover:bg-white/10 border border-white/10 rounded-xl text-left text-xs font-sans-body transition-all cursor-pointer"
+              className="py-2 px-2.5 glass hover:bg-white/10 border border-white/10 rounded-xl text-left text-xs font-sans-body transition-all cursor-pointer"
             >
-              <div className="font-bold text-amber-300 text-xs">Trek Operator</div>
-              <div className="text-slate-400 text-[10px]">pemba@everesthightreks.np</div>
+              <div className="font-bold text-amber-300 text-xs truncate">🧭 Trek Operator</div>
+              <div className="text-slate-400 text-[9px] truncate">pemba@everest...</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleDemoLogin('admin@heritage.np', 'admin123')}
+              className="py-2 px-2.5 glass hover:bg-white/10 border border-white/10 rounded-xl text-left text-xs font-sans-body transition-all cursor-pointer"
+            >
+              <div className="font-bold text-cyan-300 text-xs truncate">👑 Admin</div>
+              <div className="text-slate-400 text-[9px] truncate">admin@heritage.np</div>
             </button>
           </div>
         </div>
