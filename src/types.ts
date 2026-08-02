@@ -6,6 +6,39 @@ export interface User {
   companyName?: string;
   licenseNumber?: string;
   phone?: string;
+  travelerType?: 'solo' | 'group' | 'researcher';
+}
+
+export interface Guide {
+  id: string;
+  name: string;
+  specialty: string;
+  languages: string[];
+  ratingOutOf5: number;
+  experienceYears: number;
+  dailyRateUSD: number;
+  tier: 'budget' | 'standard' | 'expert';
+  available: boolean;
+  badge?: string;
+  imageInitials: string;
+  accentColor: string;
+}
+
+export interface TourPackage {
+  id: string;
+  name: string;
+  tagline: string;
+  targetType: 'solo' | 'group' | 'researcher' | 'all';
+  priceUSD: number;
+  durationDays: number;
+  maxGroupSize: number;
+  includedSiteCount: number;
+  includesGuide: boolean;
+  guideTier: 'budget' | 'standard' | 'expert' | 'none';
+  features: string[];
+  highlightBadge?: string;
+  popularLabel?: string;
+  colorScheme: 'cyan' | 'gold' | 'emerald' | 'violet';
 }
 
 export interface HeritageSite {
@@ -65,6 +98,9 @@ export interface Booking {
   commissionUSD?: number;
   operatorNotes?: string;
   createdAt: string;
+  travelerType?: 'solo' | 'group' | 'researcher';
+  selectedGuideId?: string;
+  selectedGuideName?: string;
 }
 
 export interface OperatorApplication {

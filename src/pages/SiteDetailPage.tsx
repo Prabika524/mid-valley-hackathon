@@ -36,6 +36,10 @@ export const SiteDetailPage: React.FC<SiteDetailPageProps> = ({
               <span className="glass text-slate-200 px-3 py-1 rounded-full font-sans-body text-xs font-semibold">
                 {site.region}
               </span>
+              <span className="flex items-center gap-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/35 px-3 py-1 rounded-full font-sans-body text-xs font-bold">
+                <span className="material-symbols-outlined text-sm">verified</span>
+                Govt. Verified Site
+              </span>
             </div>
 
             <h1 className="font-serif-headline text-4xl md:text-5xl font-bold text-white mb-3">

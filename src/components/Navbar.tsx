@@ -26,6 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'home', label: 'Home', icon: 'home' },
     { id: 'sites', label: 'Heritage Sites', icon: 'account_balance' },
     { id: 'trekking', label: 'Trekking Routes', icon: 'hiking' },
+    { id: 'packages', label: 'Tour Packages', icon: 'inventory_2' },
     { id: 'gems', label: 'Hidden Gems', icon: 'explore' },
     { id: 'calendar', label: 'Cultural Calendar', icon: 'event' },
   ];

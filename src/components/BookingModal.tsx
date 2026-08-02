@@ -27,6 +27,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [guests, setGuests] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [travelerType, setTravelerType] = useState<'solo' | 'group' | 'researcher'>('solo');
 
   useEffect(() => {
     if (isOpen) {
@@ -113,6 +114,45 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           )}
 
           <form id="booking-form" onSubmit={handleSubmit} className="space-y-5">
+            {/* Traveler Type */}
+            <div>
+              <label className="block font-sans-body text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                I am a...
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { key: 'solo' as const, label: 'Solo Tourist', icon: 'person', desc: 'Affordable' },
+                  { key: 'group' as const, label: 'Group', icon: 'group', desc: 'Shared' },
+                  { key: 'researcher' as const, label: 'Researcher', icon: 'science', desc: 'Academic' },
+                ].map((type) => (
+                  <button
+                    key={type.key}
+                    type="button"
+                    onClick={() => setTravelerType(type.key)}
+                    className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
+                      travelerType === type.key
+                        ? 'border-amber-400/60 bg-amber-500/15 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
+                        : 'border-white/10 glass hover:border-white/25'
+                    }`}
+                  >
+                    <span className={`material-symbols-outlined text-xl block mx-auto mb-1 ${
+                      travelerType === type.key ? 'text-amber-400' : 'text-slate-400'
+                    }`}>{type.icon}</span>
+                    <p className={`font-outfit text-[11px] font-bold ${
+                      travelerType === type.key ? 'text-amber-300' : 'text-slate-300'
+                    }`}>{type.label}</p>
+                    <p className="font-sans-body text-[10px] text-slate-500">{type.desc}</p>
+                  </button>
+                ))}
+              </div>
+              {travelerType === 'researcher' && (
+                <div className="mt-2 p-2.5 rounded-xl bg-violet-500/10 border border-violet-400/25 flex items-start gap-2">
+                  <span className="material-symbols-outlined text-violet-400 text-sm mt-0.5">info</span>
+                  <p className="font-sans-body text-[11px] text-violet-300">Academic access includes restricted zones. Please bring your institution ID on the day of visit.</p>
+                </div>
+              )}
+            </div>
+
             <div>
               <label className="block font-sans-body text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                 Full Name *

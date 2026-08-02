@@ -14,6 +14,7 @@ import { SiteDetailPage } from './pages/SiteDetailPage';
 import { TrekkingPage } from './pages/TrekkingPage';
 import { HiddenGemsPage } from './pages/HiddenGemsPage';
 import { CalendarPage } from './pages/CalendarPage';
+import { TourPackagesPage } from './pages/TourPackagesPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
@@ -198,6 +199,13 @@ function MainLayout() {
 
           {activeTab === 'calendar' && <CalendarPage />}
 
+          {activeTab === 'packages' && (
+            <TourPackagesPage
+              onOpenBooking={() => {
+                if (sites.length > 0) handleOpenBooking(sites[0]);
+              }}
+            />
+          )}
           {activeTab === 'checkout' && (
             <CheckoutPage
               booking={currentBooking}

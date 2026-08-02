@@ -137,6 +137,10 @@ export const SitesPage: React.FC<SitesPageProps> = ({
                     <span className="glass backdrop-blur-md text-slate-200 px-3 py-1 rounded-full font-sans-body text-xs font-semibold">
                       {site.region}
                     </span>
+                    <span className="flex items-center gap-1 bg-emerald-500/25 backdrop-blur-md text-emerald-300 border border-emerald-400/40 px-3 py-1 rounded-full font-sans-body text-xs font-bold shadow-md">
+                      <span className="material-symbols-outlined text-sm">verified</span>
+                      Verified
+                    </span>
                   </div>
 
                   <div className="absolute bottom-4 left-4 right-4 text-white">
