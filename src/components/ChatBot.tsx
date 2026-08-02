@@ -34,8 +34,9 @@ interface GroqContentPart {
 // ── Groq API helper ───────────────────────────────────────────────────────────
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-// qwen/qwen3.6-27b is Groq's supported vision (multimodal) model
-const GROQ_MODEL = 'qwen/qwen3.6-27b';
+// llama-4-scout supports vision (base64 images) natively on Groq
+const GROQ_VISION_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct';
+const GROQ_TEXT_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct';
 
 const SYSTEM_PROMPT = `You are "Himalayan Guide" – a knowledgeable, friendly AI assistant specializing in Nepal's heritage, culture, nature, and travel. 
 
@@ -56,8 +57,10 @@ Always keep responses warm, concise, and informative. Use emojis sparingly for p
 
 async function callGroqAPI(
   messages: { role: string; content: string | GroqContentPart[] }[],
-  apiKey: string
+  apiKey: string,
+  hasImage: boolean = false
 ): Promise<string> {
+  const model = hasImage ? GROQ_VISION_MODEL : GROQ_TEXT_MODEL;
   const response = await fetch(GROQ_API_URL, {
     method: 'POST',
     headers: {
@@ -65,11 +68,10 @@ async function callGroqAPI(
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: GROQ_MODEL,
+      model,
       messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
       max_tokens: 1024,
       temperature: 0.7,
-      reasoning_format: 'hidden',
     }),
   });
 
@@ -227,17 +229,18 @@ export function ChatBot() {
       content.push({ type: 'text', text: userMsg.text });
     }
 
+    // If image present, always use array format; text-only uses string for efficiency
     const userGroqMessage = {
       role: 'user',
-      content: content.length === 1 && content[0].type === 'text'
-        ? content[0].text!
-        : content,
+      content: content.length > 0 && content.some(c => c.type === 'image_url')
+        ? content
+        : (content[0]?.text ?? ''),
     };
 
     chatHistory.current = [...chatHistory.current, userGroqMessage];
 
     try {
-      const reply = await callGroqAPI(chatHistory.current, apiKey);
+      const reply = await callGroqAPI(chatHistory.current, apiKey, !!userMsg.imageUrl);
       const assistantMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
