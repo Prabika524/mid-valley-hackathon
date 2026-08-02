@@ -155,7 +155,8 @@ export function ChatBot() {
   const textInputRef = useRef<HTMLTextAreaElement>(null);
   const chatHistory = useRef<{ role: string; content: string | GroqContentPart[] }[]>([]);
 
-  const apiKey = (import.meta as unknown as { env: Record<string, string> }).env.VITE_GROQ_API_KEY;
+  const envKey = (import.meta as unknown as { env: Record<string, string> }).env.VITE_GROQ_API_KEY;
+  const apiKey = envKey || '';
 
   // Auto-scroll
   useEffect(() => {
