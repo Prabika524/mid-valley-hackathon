@@ -60,16 +60,16 @@ export const Navbar: React.FC<NavbarProps> = ({
         onClick={() => { setActiveTab(id); setMoreMenuOpen(false); }}
         className={`px-3.5 py-2 rounded-xl font-sans-body text-xs font-semibold tracking-wide transition-all cursor-pointer relative flex items-center gap-1.5 whitespace-nowrap ${
           isActive
-            ? 'text-amber-300 bg-amber-500/15 border border-amber-400/40 shadow-[0_0_14px_rgba(245,158,11,0.2)]'
-            : 'text-slate-300 hover:text-white hover:bg-white/6'
+            ? 'text-cyan-300 bg-cyan-500/15 border border-cyan-400/40 shadow-[0_0_14px_rgba(34,211,238,0.25)]'
+            : 'text-slate-300 hover:text-white hover:bg-white/5'
         }`}
       >
-        <span className={`material-symbols-outlined text-base ${isActive ? 'text-amber-400' : 'text-slate-400'}`}>
+        <span className={`material-symbols-outlined text-base ${isActive ? 'text-cyan-400' : 'text-slate-400'}`}>
           {icon}
         </span>
         <span>{label}</span>
         {isActive && (
-          <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-amber-400 rounded-full shadow-[0_0_6px_#f59e0b]" />
+          <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-4 h-1 bg-cyan-400 rounded-full shadow-[0_0_8px_#22d3ee]" />
         )}
       </button>
     );
@@ -102,12 +102,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => setActiveTab('home')}
           className="font-cinzel text-lg font-bold flex items-center gap-2.5 cursor-pointer group text-left shrink-0"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-orange-600 flex items-center justify-center shadow-[0_0_18px_rgba(245,158,11,0.45)] group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 via-sky-500 to-blue-700 flex items-center justify-center shadow-[0_0_18px_rgba(34,211,238,0.45)] group-hover:scale-105 transition-transform">
             <span className="material-symbols-outlined text-xl text-white">account_balance</span>
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-gold-gradient font-bold tracking-tight text-base">Nepal Heritage</span>
-            <span className="text-[9px] font-outfit font-semibold tracking-[0.2em] text-amber-400/80 uppercase mt-0.5">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-blue-300 font-bold tracking-tight text-base">Nepal Heritage</span>
+            <span className="text-[9px] font-outfit font-semibold tracking-[0.2em] text-cyan-400/80 uppercase mt-0.5">
               Conservation Portal
             </span>
           </div>
@@ -123,15 +123,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setMoreMenuOpen((v) => !v)}
               className={`px-3 py-2 rounded-xl font-sans-body text-xs font-semibold transition-all cursor-pointer flex items-center gap-1 ${
                 moreMenuOpen || moreLinks.some((l) => l.id === activeTab)
-                  ? 'text-amber-300 bg-amber-500/15 border border-amber-400/40'
-                  : 'text-slate-400 hover:text-white hover:bg-white/6 border border-transparent'
+                  ? 'text-cyan-300 bg-cyan-500/15 border border-cyan-400/40'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
               }`}
               title="More pages"
               aria-label="More navigation options"
             >
               <span className="material-symbols-outlined text-base">more_horiz</span>
               {moreLinks.some((l) => l.id === activeTab) && (
-                <span className="text-amber-300 text-[10px] font-bold hidden xl:inline">
+                <span className="text-cyan-300 text-[10px] font-bold hidden xl:inline">
                   {moreLinks.find((l) => l.id === activeTab)?.label}
                 </span>
               )}
@@ -149,15 +149,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                       onClick={() => { setActiveTab(link.id); setMoreMenuOpen(false); }}
                       className={`w-full text-left px-4 py-2.5 font-sans-body text-xs font-semibold flex items-center gap-2.5 transition-colors cursor-pointer ${
                         isActive
-                          ? 'text-amber-300 bg-amber-500/12'
+                          ? 'text-cyan-300 bg-cyan-500/12'
                           : 'text-slate-300 hover:text-white hover:bg-white/8'
                       }`}
                     >
-                      <span className={`material-symbols-outlined text-base ${isActive ? 'text-amber-400' : 'text-slate-500'}`}>
+                      <span className={`material-symbols-outlined text-base ${isActive ? 'text-cyan-400' : 'text-slate-500'}`}>
                         {link.icon}
                       </span>
                       {link.label}
-                      {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-amber-400" />}
+                      {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400" />}
                     </button>
                   );
                 })}
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {openBookingModal && (
             <button
               onClick={openBookingModal}
-              className="glass-button-gold px-4 py-2 rounded-full font-sans-body text-xs font-bold transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
+              className="glass-button-cyan px-4 py-2 rounded-full font-sans-body text-xs font-bold transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">confirmation_number</span>
               <span>Book Ticket</span>
@@ -266,7 +266,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 glass rounded-xl text-amber-400 border border-amber-400/30 cursor-pointer"
+            className="p-2 glass rounded-xl text-cyan-400 border border-cyan-400/30 cursor-pointer"
             aria-label="Toggle menu"
           >
             <span className="material-symbols-outlined text-xl">{mobileMenuOpen ? 'close' : 'menu'}</span>
@@ -276,7 +276,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-panel border-b border-amber-500/20 px-4 py-4 space-y-2">
+        <div className="md:hidden glass-panel border-b border-cyan-500/20 px-4 py-4 space-y-2">
           {/* Search */}
           <button
             onClick={() => { onOpenSearch(); setMobileMenuOpen(false); }}
@@ -296,11 +296,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => { setActiveTab(link.id); setMobileMenuOpen(false); }}
                   className={`px-3 py-3 rounded-xl font-sans-body text-xs font-bold flex items-center gap-2 cursor-pointer transition-all ${
                     isActive
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-400/40'
+                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40'
                       : 'text-slate-300 glass border border-white/8 hover:border-white/20'
                   }`}
                 >
-                  <span className={`material-symbols-outlined text-base ${isActive ? 'text-amber-400' : 'text-slate-400'}`}>
+                  <span className={`material-symbols-outlined text-base ${isActive ? 'text-cyan-400' : 'text-slate-400'}`}>
                     {link.icon}
                   </span>
                   <span className="leading-tight">{link.label}</span>
