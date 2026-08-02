@@ -34,9 +34,10 @@ interface GroqContentPart {
 // ── Groq API helper ───────────────────────────────────────────────────────────
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-// llama-4-scout supports vision (base64 images) natively on Groq
-const GROQ_VISION_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct';
-const GROQ_TEXT_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct';
+// qwen/qwen3.6-27b supports vision (multimodal) on Groq
+const GROQ_VISION_MODEL = 'qwen/qwen3.6-27b';
+// llama-3.3-70b-versatile for fast, reliable text responses
+const GROQ_TEXT_MODEL = 'llama-3.3-70b-versatile';
 
 const SYSTEM_PROMPT = `You are "Himalayan Guide" – a knowledgeable, friendly AI assistant specializing in Nepal's heritage, culture, nature, and travel. 
 
@@ -87,10 +88,50 @@ async function callGroqAPI(
     choices: { message: { content: string } }[];
   };
   const reply = data.choices[0]?.message?.content ?? 'No response received.';
-  return reply.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+  return reply
+    .replace(/<think>[\s\S]*?<\/think>/g, '')
+    .replace(/<think>[\s\S]*/g, '')
+    .trim();
 }
 
-// Convert a File to base64 data URL
+// Compress and resize image to fit within token limits
+function compressImage(file: File, maxDim = 800, quality = 0.75): Promise<string> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let w = img.width;
+      let h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) {
+          h = Math.round((h * maxDim) / w);
+          w = maxDim;
+        } else {
+          w = Math.round((w * maxDim) / h);
+          h = maxDim;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      } else {
+        fileToBase64(file).then(resolve);
+      }
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      fileToBase64(file).then(resolve);
+    };
+    img.src = url;
+  });
+}
+
+// Convert a File to base64 data URL fallback
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -184,7 +225,7 @@ export function ChatBot() {
       alert('Image must be under 10 MB.');
       return;
     }
-    const url = await fileToBase64(file);
+    const url = await compressImage(file);
     setPendingImage({ file, url });
     // Reset file input so same file can be re-selected
     e.target.value = '';
