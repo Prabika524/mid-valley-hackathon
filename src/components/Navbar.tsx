@@ -231,6 +231,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                       Operator Dashboard
                     </button>
                   )}
+                  {user.role === 'user' && (
+                    <button
+                      onClick={() => { setActiveTab('customer'); setProfileDropdownOpen(false); }}
+                      className="w-full text-left px-4 py-2.5 font-sans-body text-xs text-slate-200 hover:bg-white/10 hover:text-emerald-300 flex items-center gap-2 transition-colors cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-lg text-emerald-400">travel_explore</span>
+                      My Dashboard
+                    </button>
+                  )}
                   <button
                     onClick={() => { logout(); setProfileDropdownOpen(false); }}
                     className="w-full text-left px-4 py-2.5 font-sans-body text-xs text-red-400 hover:bg-red-500/10 flex items-center gap-2 transition-colors cursor-pointer"

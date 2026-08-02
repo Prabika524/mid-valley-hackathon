@@ -208,6 +208,25 @@
   ],
   "bookings": [
     {
+      "clientName": "aman",
+      "email": "aman@gmail.com",
+      "phone": "",
+      "passportNumber": "234567890-",
+      "nationality": "Foreign National",
+      "siteId": "pashupatinath",
+      "siteName": "Pashupatinath Temple",
+      "visitDate": "2026-08-03",
+      "guests": 1,
+      "totalPriceUSD": 15,
+      "paymentMethod": "Card",
+      "status": "Confirmed",
+      "entryGate": "Main Gate Entrance",
+      "ticketType": "Standard Entry (1 Guest)",
+      "commissionUSD": 2.25,
+      "id": "BK-9074",
+      "createdAt": "2026-08-02T02:44:27.911Z"
+    },
+    {
       "clientName": "Rohan",
       "email": "shien123maske@gmail.com",
       "phone": "",
@@ -355,6 +374,14 @@
     }
   ],
   "activities": [
+    {
+      "id": "act_1785638667911",
+      "title": "Pashupatinath Temple Visit",
+      "operator": "aman",
+      "status": "Confirmed",
+      "timeAgo": "Just now",
+      "type": "heritage"
+    },
     {
       "id": "act_1785561451871",
       "title": "Pashupatinath Temple Visit",

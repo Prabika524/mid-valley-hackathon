@@ -18,6 +18,7 @@ import { TourPackagesPage } from './pages/TourPackagesPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { CustomerDashboardPage } from './pages/CustomerDashboardPage';
 
 // Admin / Operator Pages
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
@@ -216,12 +217,22 @@ function MainLayout() {
           {activeTab === 'login' && (
             <LoginPage
               setActiveTab={setActiveTab}
-              onLoginSuccess={() => setActiveTab('admin')}
+              onLoginSuccess={(role?: string) => {
+                if (role === 'user') {
+                  setActiveTab('customer');
+                } else {
+                  setActiveTab('admin');
+                }
+              }}
             />
           )}
 
           {activeTab === 'register' && (
             <RegisterPage setActiveTab={setActiveTab} />
+          )}
+
+          {activeTab === 'customer' && (
+            <CustomerDashboardPage setActiveTab={setActiveTab} />
           )}
         </main>
       )}

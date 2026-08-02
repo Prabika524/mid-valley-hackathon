@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 
 interface LoginPageProps {
   setActiveTab: (tab: string) => void;
-  onLoginSuccess: () => void;
+  onLoginSuccess: (role?: string) => void;
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({
@@ -22,9 +22,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setLoading(true);
 
     try {
-      await login(email, password);
+      const loggedUser = await login(email, password);
       setLoading(false);
-      onLoginSuccess();
+      onLoginSuccess(loggedUser.role);
     } catch (err: any) {
       setLoading(false);
       setError(err.message || 'Login failed');
@@ -37,9 +37,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setError('');
     setLoading(true);
     try {
-      await login(demoEmail, demoPass);
+      const loggedUser = await login(demoEmail, demoPass);
       setLoading(false);
-      onLoginSuccess();
+      onLoginSuccess(loggedUser.role);
     } catch (err: any) {
       setLoading(false);
       setError(err.message || 'Demo login failed');
