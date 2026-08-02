@@ -1,0 +1,6 @@
+{
+  "name": "Nepal Heritage",
+  "description": "Verified tickets, heritage conservation, trekking routes, and operator management portal for Nepal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

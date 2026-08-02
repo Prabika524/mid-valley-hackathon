@@ -1,36 +1,11 @@
-import React, { useState } from 'react';
+import re
 
-interface NearbyPlace {
-  name: string;
-  type: string;
-  distance: string;
-  rating: number;
-  priceRange: string;
-  mapUrl: string;
-}
+filepath = r'c:\Users\ASUS\Downloads\Mid-Valley-Hackathon-main\Mid-Valley-Hackathon-main\src\pages\CalendarPage.tsx'
 
-interface Festival {
-  id: string;
-  name: string;
-  month: number; // 0-indexed: 0=Jan, 1=Feb, 2=Mar, 3=Apr, 4=May, 5=Jun, 6=Jul, 7=Aug, 8=Sep, 9=Oct, 10=Nov, 11=Dec
-  year: number;
-  startDay: number;
-  endDay?: number;
-  location: string;
-  isNationwide: boolean;
-  category: string;
-  description: string;
-  history: string;
-  whatHappens: string[];
-  experience: string;
-  imageUrl: string;
-  photos: string[]; // additional gallery images
-  mapUrl?: string;
-  nearbyHotels: NearbyPlace[];
-  nearbyRestaurants: NearbyPlace[];
-}
+with open(filepath, 'r', encoding='utf-8') as f:
+    content = f.read()
 
-const FESTIVALS: Festival[] = [
+new_festivals_code = '''const FESTIVALS: Festival[] = [
   // ── APRIL ────────────────────────────────────────────────────────────────
   {
     id: 'bisket-jatra',
@@ -137,10 +112,10 @@ const FESTIVALS: Festival[] = [
     id: 'rato-machhindranath',
     name: 'Rato Machhindranath Jatra',
     month: 4, year: 2027, startDay: 1, endDay: 30,
-    location: "Patan\'s Long Chariot Procession", isNationwide: false,
+    location: "Patan's Long Chariot Procession", isNationwide: false,
     mapUrl: 'https://www.google.com/maps/search/Patan+Durbar+Square+Lalitpur+Nepal',
     category: 'Longest Chariot Festival (Patan)',
-    description: "The world\'s longest chariot festival. A towering chariot built from wood and leafy pine branches is slowly pulled through Patan\'s streets over months to honor Rato Machhindranath, the God of Harvest and Rain.",
+    description: "The world's longest chariot festival. A towering chariot built from wood and leafy pine branches is slowly pulled through Patan's streets over months to honor Rato Machhindranath, the God of Harvest and Rain.",
     history: 'Dating back to the 10th century, this festival originated when Kathmandu Valley faced a catastrophic drought. The farmer-god Machhindranath (also revered as Bunga Dyo) was brought to Patan to bring rain. The annual chariot festival re-enacts this journey. The chariot is constructed fresh each year by skilled Newar craftsmen using traditional techniques passed down for generations.',
     whatHappens: [
       'Master craftsmen spend weeks building the massive chariot entirely from bamboo, pine wood, and cloth using no nails.',
@@ -205,7 +180,7 @@ const FESTIVALS: Festival[] = [
     name: 'Teej',
     month: 7, year: 2026, startDay: 27,
     location: 'Pashupatinath Temple & Nationwide', isNationwide: true,
-    category: "Women\'s Festival (Red Saris)",
+    category: 'Women\'s Festival (Red Saris)',
     description: 'Women dress in vibrant red saris, fast for marital bliss and family prosperity, and dance joyfully in groups. Pashupatinath becomes a stunning sea of red-clad women singing and swaying together.',
     history: 'Teej is rooted in the legend of Goddess Parvati, who fasted and prayed for Lord Shiva to accept her as his bride. Observed on the third day of Bhadra, the festival is one of the most important for Hindu women in Nepal. It blends religious devotion with social celebration — a rare space where women sing, dance publicly, and express social joy.',
     whatHappens: [
@@ -229,7 +204,7 @@ const FESTIVALS: Festival[] = [
     ],
     nearbyRestaurants: [
       { name: 'Pashupati Area Dhabas', type: 'Traditional Nepali', distance: '0.2 km', rating: 3.9, priceRange: '$', mapUrl: 'https://www.google.com/maps/search/restaurant+near+Pashupatinath+Kathmandu' },
-      { name: "The Dwarika\'s Restaurant", type: 'Heritage Dining', distance: '1 km', rating: 4.8, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Dwarikas+Hotel+Kathmandu' },
+      { name: 'The Dwarika\'s Restaurant', type: 'Heritage Dining', distance: '1 km', rating: 4.8, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Dwarikas+Hotel+Kathmandu' },
     ],
   },
   {
@@ -240,7 +215,7 @@ const FESTIVALS: Festival[] = [
     mapUrl: 'https://www.google.com/maps/search/Kathmandu+Durbar+Square+Nepal',
     category: 'Cow Procession & Satire',
     description: 'Families who lost a member in the past year lead children dressed with cow crowns and paper headpieces through the streets to guide souls to heaven, alongside satirical street performances.',
-    history: 'Gai Jatra was established by 17th century Malla king Pratap Malla to console his queen after their son died. When nothing made her smile, the king invited all bereaved families to parade through Kathmandu — the sight of the city united in humor and solidarity finally brought comfort. The tradition of lighthearted satire and political parody grew from this original act.',
+    history: 'Gai Jatra was established by 17th-century Malla king Pratap Malla to console his queen after their son died. When nothing made her smile, the king invited all bereaved families to parade through Kathmandu — the sight of the city united in humor and solidarity finally brought comfort. The tradition of lighthearted satire and political parody grew from this original act.',
     whatHappens: [
       'Families who lost a member dress a young boy with painted paper crowns with cow motifs (or lead a real cow) in procession.',
       'Participants dress in creative costumes — clowns, demons, political satire figures — for colorful street parades.',
@@ -299,8 +274,8 @@ const FESTIVALS: Festival[] = [
     id: 'dashain',
     name: 'Bada Dashain',
     month: 9, year: 2026, startDay: 18, endDay: 28,
-    location: "Nationwide (Nepal\'s Biggest Festival)", isNationwide: true,
-    category: "Nepal\'s Biggest Festival (Tika Ceremony)",
+    location: 'Nationwide (Nepal\'s Biggest Festival)', isNationwide: true,
+    category: 'Nepal\'s Biggest Festival (Tika Ceremony)',
     description: 'Nepal\'s grandest 15-day festival. Elders bless family members with red tika and sprouted yellow jamara grass, towering bamboo swings (Linge Ping) are erected on hilltops, and kites fly over blue skies.',
     history: 'Dashain celebrates the triumph of Goddess Durga over the demon Mahishasura. It is Nepal\'s longest national holiday. Rooted in ancient tradition, Dashain is the emotional center of Nepali family life, reuniting families from all corners of the world.',
     whatHappens: [
@@ -323,7 +298,7 @@ const FESTIVALS: Festival[] = [
       { name: 'Gokarna Forest Resort', type: 'Resort', distance: '8 km from city center', rating: 4.7, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Gokarna+Forest+Resort+Kathmandu' },
     ],
     nearbyRestaurants: [
-      { name: "The Dwarika\'s Restaurant", type: 'Heritage Nepali', distance: 'Dwarika\'s Hotel', rating: 4.8, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Dwarikas+Hotel+Kathmandu' },
+      { name: 'The Dwarika\'s Restaurant', type: 'Heritage Nepali', distance: 'Dwarika\'s Hotel', rating: 4.8, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Dwarikas+Hotel+Kathmandu' },
     ],
   },
   // ── OCTOBER–NOVEMBER ─────────────────────────────────────────────────────
@@ -502,7 +477,7 @@ const FESTIVALS: Festival[] = [
       { name: 'Hyatt Regency Kathmandu', type: 'Luxury Hotel', distance: '0.3 km', rating: 4.7, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Hyatt+Regency+Kathmandu' },
     ],
     nearbyRestaurants: [
-      { name: "The Dwarika\'s Restaurant", type: 'Heritage Dining', distance: '1 km', rating: 4.8, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Dwarikas+Hotel+Kathmandu' },
+      { name: 'The Dwarika\'s Restaurant', type: 'Heritage Dining', distance: '1 km', rating: 4.8, priceRange: '$$$$', mapUrl: 'https://www.google.com/maps/search/Dwarikas+Hotel+Kathmandu' },
     ],
   },
   // ── MARCH ────────────────────────────────────────────────────────────────
@@ -534,477 +509,15 @@ const FESTIVALS: Festival[] = [
       { name: 'Bhojan Griha', type: 'Traditional Newari', distance: '0.5 km', rating: 4.7, priceRange: '$$$', mapUrl: 'https://www.google.com/maps/search/Bhojan+Griha+Kathmandu' },
     ],
   },
-];
+];'''
 
-const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAY_NAMES = ['S','M','T','W','T','F','S'];
-const INITIAL_MONTH = 8;
-const INITIAL_YEAR = 2026;
+start_idx = content.find('const FESTIVALS: Festival[] = [')
+end_idx = content.find('const MONTH_NAMES = [')
 
-const MONTH_QUICK_FILTERS = [
-  { label: 'April', sub: 'Bisket Jatra', month: 3 },
-  { label: 'May', sub: 'Buddha Jayanti', month: 4 },
-  { label: 'Jul-Aug', sub: 'Janai Purnima', month: 6 },
-  { label: 'August', sub: 'Teej & Gai Jatra', month: 7 },
-  { label: 'September', sub: 'Indra Jatra', month: 8 },
-  { label: 'Sept-Oct', sub: 'Bada Dashain', month: 9 },
-  { label: 'October', sub: 'Mani Rimdu', month: 9 },
-  { label: 'November', sub: 'Tihar & Chhath', month: 10 },
-  { label: 'December', sub: 'Tamu Losar', month: 11 },
-  { label: 'January', sub: 'Maghe Sankranti', month: 0 },
-  { label: 'February', sub: 'Shivaratri', month: 1 },
-  { label: 'March', sub: 'Holi', month: 2 },
-];
-
-function getDaysInMonth(month: number, year: number) { return new Date(year, month + 1, 0).getDate(); }
-function getFirstDayOfMonth(month: number, year: number) { return new Date(year, month, 1).getDay(); }
-function getFestivalsForDay(month: number, year: number, day: number): Festival[] {
-  return FESTIVALS.filter(f => {
-    if (f.month !== month || f.year !== year) return false;
-    return f.endDay ? day >= f.startDay && day <= f.endDay : f.startDay === day;
-  });
-}
-function getFestivalsForMonth(month: number, year: number): Festival[] {
-  return FESTIVALS.filter(f => f.month === month && f.year === year);
-}
-const FESTIVALS_SORTED = [...FESTIVALS].sort((a, b) => {
-  if (a.year !== b.year) return a.year - b.year;
-  if (a.month !== b.month) return a.month - b.month;
-  return a.startDay - b.startDay;
-});
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <span className="flex items-center gap-0.5">
-      {[1,2,3,4,5].map(i => (
-        <span key={i} className={`text-xs ${i <= Math.round(rating) ? 'text-amber-400' : 'text-slate-600'}`}>★</span>
-      ))}
-      <span className="font-sans-body text-[10px] text-slate-400 ml-1">{rating.toFixed(1)}</span>
-    </span>
-  );
-}
-
-export const CalendarPage: React.FC = () => {
-  const [currentMonth, setCurrentMonth] = useState(INITIAL_MONTH);
-  const [currentYear, setCurrentYear] = useState(INITIAL_YEAR);
-  const [selectedFestival, setSelectedFestival] = useState<Festival | null>(FESTIVALS[0]);
-  const [selectedDay, setSelectedDay] = useState<number | null>(FESTIVALS[0].startDay);
-  const [activeTab, setActiveDetailTab] = useState<'about' | 'events' | 'nearby'>('about');
-  const [activeImage, setActiveImage] = useState<string | null>(null);
-  const [modalImage, setModalImage] = useState<string | null>(null);
-
-  const daysInMonth = getDaysInMonth(currentMonth, currentYear);
-  const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
-  const monthFestivals = getFestivalsForMonth(currentMonth, currentYear);
-
-  const prevMonth = () => {
-    if (currentMonth === 0) { setCurrentMonth(11); setCurrentYear(y => y - 1); }
-    else setCurrentMonth(m => m - 1);
-    setSelectedDay(null); setSelectedFestival(null);
-  };
-  const nextMonth = () => {
-    if (currentMonth === 11) { setCurrentMonth(0); setCurrentYear(y => y + 1); }
-    else setCurrentMonth(m => m + 1);
-    setSelectedDay(null); setSelectedFestival(null);
-  };
-  const handleDayClick = (day: number) => {
-    const fests = getFestivalsForDay(currentMonth, currentYear, day);
-    if (fests.length > 0) { setSelectedDay(day); setSelectedFestival(fests[0]); setActiveDetailTab('about'); setActiveImage(null); }
-    else { setSelectedDay(null); setSelectedFestival(null); }
-  };
-  const selectFestival = (f: Festival) => {
-    setCurrentMonth(f.month); setCurrentYear(f.year);
-    setSelectedDay(f.startDay); setSelectedFestival(f); setActiveDetailTab('about'); setActiveImage(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-  const selectMonthFilter = (m: number) => {
-    setCurrentMonth(m);
-    const fests = FESTIVALS.filter(f => f.month === m);
-    if (fests.length > 0) {
-      setSelectedFestival(fests[0]);
-      setSelectedDay(fests[0].startDay);
-    } else {
-      setSelectedFestival(null);
-      setSelectedDay(null);
-    }
-  };
-
-  const calendarCells: (number | null)[] = [];
-  for (let i = 0; i < firstDay; i++) calendarCells.push(null);
-  for (let d = 1; d <= daysInMonth; d++) calendarCells.push(d);
-
-  return (
-    <div className="w-full px-4 md:px-10 max-w-[1280px] mx-auto py-10 min-h-screen text-slate-100">
-
-      {/* Header */}
-      <header className="mb-6">
-        <span className="inline-block font-sans-body text-xs font-bold uppercase tracking-widest text-amber-400 mb-2">Living Traditions of Nepal</span>
-        <h1 className="font-serif-headline text-4xl md:text-5xl font-bold text-white mb-3">Cultural Calendar &amp; Festival Gallery</h1>
-        <p className="font-sans-body text-sm text-slate-300 max-w-2xl">
-          Explore Nepal\'s major ancient festivals month by month. Click any date or month shortcut below to inspect full visual details, history, rituals, and nearby stays.
-        </p>
-      </header>
-
-      {/* Month Shortcuts Filter Bar */}
-      <div className="mb-8 overflow-x-auto pb-2 scrollbar-thin">
-        <div className="flex items-center gap-2 min-w-max">
-          <span className="font-sans-body text-xs font-bold text-slate-400 mr-1 uppercase tracking-wider">Filter Month:</span>
-          {MONTH_QUICK_FILTERS.map((mf, idx) => {
-            const isActive = currentMonth === mf.month;
-            return (
-              <button
-                key={idx}
-                onClick={() => selectMonthFilter(mf.month)}
-                className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer text-left border flex flex-col ${
-                  isActive
-                    ? 'bg-amber-500/25 border-amber-400 text-amber-300 shadow-md shadow-amber-500/10'
-                    : 'glass border-white/10 text-slate-300 hover:border-amber-400/40 hover:text-white'
-                }`}
-              >
-                <span className="font-sans-body text-xs font-bold leading-tight">{mf.label}</span>
-                <span className="font-sans-body text-[9px] text-slate-400 opacity-80">{mf.sub}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Main Layout: small calendar left, big detail right */}
-      <div className="flex flex-col lg:flex-row gap-6">
-
-        {/* ── Compact Calendar ──────────────────────────────────────────── */}
-        <div className="lg:w-72 xl:w-80 shrink-0">
-          <div className="glass-panel rounded-2xl p-4 border border-white/10 shadow-xl sticky top-20">
-
-            {/* Month Nav */}
-            <div className="flex items-center justify-between mb-3">
-              <button onClick={prevMonth} className="glass p-1.5 rounded-lg border border-white/10 hover:border-cyan-400/50 text-slate-300 hover:text-white transition-all cursor-pointer">
-                <span className="material-symbols-outlined text-base">chevron_left</span>
-              </button>
-              <div className="text-center">
-                <p className="font-serif-headline text-base font-bold text-white">{MONTH_NAMES[currentMonth]}</p>
-                <p className="font-sans-body text-[10px] text-cyan-400 font-bold">{currentYear}</p>
-              </div>
-              <button onClick={nextMonth} className="glass p-1.5 rounded-lg border border-white/10 hover:border-cyan-400/50 text-slate-300 hover:text-white transition-all cursor-pointer">
-                <span className="material-symbols-outlined text-base">chevron_right</span>
-              </button>
-            </div>
-
-            {/* Day headers */}
-            <div className="grid grid-cols-7 mb-1">
-              {DAY_NAMES.map((d, i) => (
-                <div key={i} className="text-center font-sans-body text-[10px] font-bold text-slate-500 py-1">{d}</div>
-              ))}
-            </div>
-
-            {/* Cells */}
-            <div className="grid grid-cols-7 gap-0.5">
-              {calendarCells.map((day, idx) => {
-                if (!day) return <div key={`e-${idx}`} className="h-8" />;
-                const fests = getFestivalsForDay(currentMonth, currentYear, day);
-                const hasFest = fests.length > 0;
-                const isSel = selectedDay === day;
-                return (
-                  <div
-                    key={day}
-                    onClick={() => handleDayClick(day)}
-                    className={`h-8 flex flex-col items-center justify-center rounded-lg transition-all relative
-                      ${hasFest ? 'cursor-pointer' : 'cursor-default'}
-                      ${isSel ? 'bg-amber-500/30 border border-amber-400/70 shadow-md' : hasFest ? 'bg-amber-500/10 border border-amber-400/25 hover:bg-amber-500/20 hover:border-amber-400/50' : 'border border-transparent'}`}
-                  >
-                    <span className={`font-sans-body text-xs font-bold leading-none ${isSel ? 'text-amber-300' : hasFest ? 'text-amber-200' : 'text-slate-400'}`}>{day}</span>
-                    {hasFest && <span className="w-1 h-1 rounded-full bg-amber-400 absolute bottom-0.5" />}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* This month legend */}
-            {monthFestivals.length > 0 && (
-              <div className="mt-3 pt-3 border-t border-white/10">
-                <p className="font-sans-body text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">This Month's Festivals</p>
-                <div className="flex flex-col gap-1.5">
-                  {monthFestivals.map(f => (
-                    <button key={f.id} onClick={() => selectFestival(f)}
-                      className={`flex items-center gap-2 p-2 rounded-xl text-left transition-all cursor-pointer ${selectedFestival?.id === f.id ? 'bg-amber-500/20 border border-amber-400/50' : 'glass border border-white/10 hover:border-amber-400/30'}`}>
-                      <span className="material-symbols-outlined text-xs text-amber-400">celebration</span>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-sans-body text-[11px] font-bold text-white truncate">{f.name}</p>
-                        <p className="font-sans-body text-[9px] text-slate-400">{MONTH_NAMES[f.month].slice(0,3)} {f.startDay}{f.endDay ? `–${f.endDay}` : ''}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            {monthFestivals.length === 0 && (
-              <p className="text-center font-sans-body text-[11px] text-slate-500 mt-3 pt-3 border-t border-white/10">No festivals this month</p>
-            )}
-          </div>
-        </div>
-
-        {/* ── Detail Panel ──────────────────────────────────────────────── */}
-        <div className="flex-1 min-w-0">
-          {selectedFestival ? (
-            <div className="glass-panel rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
-
-              {/* Hero Image — prominent preview with click-to-zoom modal */}
-              <div className="relative h-80 md:h-96 w-full overflow-hidden group cursor-pointer" onClick={() => setModalImage(activeImage || selectedFestival.imageUrl)}>
-                <img
-                  src={activeImage || selectedFestival.imageUrl}
-                  alt={selectedFestival.name}
-                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                  onError={(e) => {
-                    const img = e.target as HTMLImageElement;
-                    img.src = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/30 to-transparent" />
-                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-white font-sans-body text-xs font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="material-symbols-outlined text-sm">zoom_in</span> Click to Enlarge
-                </div>
-                <div className="absolute bottom-5 left-6 right-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-2">
-                  <div>
-                    <span className="font-sans-body text-[11px] font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-0.5 rounded-md border border-amber-400/30 inline-block mb-1">
-                      {selectedFestival.category}
-                    </span>
-                    <h2 className="font-serif-headline text-3xl md:text-4xl font-bold text-white leading-tight drop-shadow-lg">{selectedFestival.name}</h2>
-                  </div>
-                </div>
-              </div>
-
-              {/* Photo strip — click to swap main hero image */}
-              <div className="px-6 py-3 border-b border-white/10 bg-black/20">
-                <p className="font-sans-body text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-                  <span className="material-symbols-outlined text-xs text-amber-400">photo_library</span> Festival Gallery (Click thumbnail to view)
-                </p>
-                <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-thin">
-                  {selectedFestival.photos.map((url, i) => {
-                    const isCurrent = (activeImage || selectedFestival.imageUrl) === url;
-                    return (
-                      <div
-                        key={i}
-                        onClick={() => setActiveImage(url)}
-                        className={`shrink-0 w-24 h-16 rounded-xl overflow-hidden cursor-pointer transition-all border-2 ${
-                          isCurrent ? 'border-amber-400 opacity-100 scale-105 shadow-lg shadow-amber-400/20' : 'border-transparent opacity-60 hover:opacity-90 hover:border-amber-400/50'
-                        }`}
-                        title={`View photo ${i + 1}`}
-                      >
-                        <img
-                          src={url}
-                          alt={`${selectedFestival.name} ${i + 1}`}
-                          className="w-full h-full object-cover"
-                          onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = 'none'; }}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Meta row */}
-              <div className="px-6 py-3.5 flex flex-wrap items-center gap-3 border-b border-white/10 bg-white/5">
-                <span className="flex items-center gap-1.5 font-sans-body text-xs text-slate-200 bg-white/10 px-3 py-1 rounded-xl">
-                  <span className="material-symbols-outlined text-sm text-cyan-400">calendar_today</span>
-                  {selectedFestival.endDay
-                    ? `${MONTH_NAMES[selectedFestival.month]} ${selectedFestival.startDay}–${selectedFestival.endDay}, ${selectedFestival.year}`
-                    : `${MONTH_NAMES[selectedFestival.month]} ${selectedFestival.startDay}, ${selectedFestival.year}`}
-                </span>
-                <span className="flex items-center gap-1.5 font-sans-body text-xs text-slate-200 bg-white/10 px-3 py-1 rounded-xl flex-1 min-w-0">
-                  <span className="material-symbols-outlined text-sm text-cyan-400">location_on</span>
-                  <span className="truncate">{selectedFestival.isNationwide ? 'Celebrated all over Nepal' : selectedFestival.location}</span>
-                </span>
-                {selectedFestival.mapUrl && (
-                  <a href={selectedFestival.mapUrl} target="_blank" rel="noopener noreferrer"
-                    className="shrink-0 flex items-center gap-1 glass px-3 py-1 rounded-xl border border-cyan-400/30 hover:border-cyan-400/70 text-cyan-400 hover:text-cyan-300 font-sans-body text-xs font-bold transition-all">
-                    <span className="material-symbols-outlined text-xs">map</span>View on Google Maps
-                  </a>
-                )}
-                {selectedFestival.isNationwide
-                  ? <span className="shrink-0 bg-cyan-500/15 text-cyan-300 px-3 py-1 rounded-full font-sans-body text-xs font-bold border border-cyan-400/30">🇳🇵 Nationwide</span>
-                  : <span className="shrink-0 bg-amber-500/15 text-amber-300 px-3 py-1 rounded-full font-sans-body text-xs font-bold border border-amber-400/30">📍 Specific Location</span>
-                }
-              </div>
-
-              {/* Detail Tabs */}
-              <div className="px-6 pt-4 flex gap-2 border-b border-white/10">
-                {(['about', 'events', 'nearby'] as const).map(tab => (
-                  <button key={tab} onClick={() => setActiveDetailTab(tab)}
-                    className={`px-5 py-2.5 rounded-t-xl font-sans-body text-xs font-bold transition-all cursor-pointer capitalize flex items-center gap-1.5
-                      ${activeTab === tab ? 'bg-amber-500/20 border border-amber-400/40 border-b-0 text-amber-300 shadow-md' : 'text-slate-400 hover:text-white'}`}>
-                    <span className="material-symbols-outlined text-sm">
-                      {tab === 'about' ? 'info' : tab === 'events' ? 'event_note' : 'near_me'}
-                    </span>
-                    {tab === 'about' ? 'About & History' : tab === 'events' ? 'What Happens' : 'Nearby Stays & Dining'}
-                  </button>
-                ))}
-              </div>
-
-              {/* Tab Content */}
-              <div className="p-6 space-y-6">
-
-                {activeTab === 'about' && (
-                  <>
-                    <div>
-                      <p className="font-sans-body text-xs font-bold text-cyan-400 uppercase tracking-widest mb-2 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-sm">description</span> Overview
-                      </p>
-                      <p className="font-sans-body text-base text-slate-200 leading-relaxed">{selectedFestival.description}</p>
-                    </div>
-                    <div className="carved-line opacity-20" />
-                    <div>
-                      <p className="font-sans-body text-xs font-bold text-cyan-400 uppercase tracking-widest mb-2 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-sm">history_edu</span> History &amp; Cultural Origins
-                      </p>
-                      <p className="font-sans-body text-sm text-slate-300 leading-relaxed">{selectedFestival.history}</p>
-                    </div>
-                    <div className="glass rounded-2xl p-5 border border-amber-400/30 bg-amber-500/5">
-                      <p className="font-sans-body text-xs font-bold text-amber-400 mb-2 flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-base">star</span> Tourist &amp; Visitor Experience
-                      </p>
-                      <p className="font-sans-body text-sm text-slate-200 leading-relaxed">{selectedFestival.experience}</p>
-                    </div>
-                  </>
-                )}
-
-                {activeTab === 'events' && (
-                  <div>
-                    <p className="font-sans-body text-xs font-bold text-cyan-400 uppercase tracking-widest mb-4 flex items-center gap-1">
-                      <span className="material-symbols-outlined text-sm">checklist</span> Key Highlights &amp; Ritual Sequence
-                    </p>
-                    <div className="space-y-3">
-                      {selectedFestival.whatHappens.map((event, i) => (
-                        <div key={i} className="flex items-start gap-3.5 glass rounded-2xl p-4 border border-white/10 hover:border-amber-400/30 transition-all">
-                          <span className="shrink-0 w-7 h-7 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center font-sans-body text-xs font-bold text-amber-300">{i + 1}</span>
-                          <p className="font-sans-body text-sm text-slate-200 leading-relaxed">{event}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === 'nearby' && (
-                  <div className="space-y-6">
-                    {/* Hotels */}
-                    <div>
-                      <p className="font-sans-body text-xs font-bold text-cyan-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm">hotel</span>Recommended Nearby Hotels &amp; Lodges
-                      </p>
-                      <div className="space-y-2.5">
-                        {selectedFestival.nearbyHotels.map((h, i) => (
-                          <a key={i} href={h.mapUrl} target="_blank" rel="noopener noreferrer"
-                            className="flex items-center gap-3.5 glass rounded-2xl p-4 border border-white/10 hover:border-cyan-400/40 transition-all group">
-                            <div className="shrink-0 w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center">
-                              <span className="material-symbols-outlined text-lg text-cyan-400">hotel</span>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <p className="font-sans-body text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">{h.name}</p>
-                                <span className="font-sans-body text-[10px] text-slate-300 glass px-2 py-0.5 rounded-md border border-white/10">{h.priceRange}</span>
-                              </div>
-                              <p className="font-sans-body text-xs text-slate-400 mb-1">{h.type} · {h.distance}</p>
-                              <StarRating rating={h.rating} />
-                            </div>
-                            <span className="material-symbols-outlined text-sm text-slate-500 group-hover:text-cyan-400 transition-colors shrink-0">open_in_new</span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="carved-line opacity-20" />
-
-                    {/* Restaurants */}
-                    <div>
-                      <p className="font-sans-body text-xs font-bold text-cyan-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm">restaurant</span>Nearby Traditional Restaurants &amp; Dining
-                      </p>
-                      <div className="space-y-2.5">
-                        {selectedFestival.nearbyRestaurants.map((r, i) => (
-                          <a key={i} href={r.mapUrl} target="_blank" rel="noopener noreferrer"
-                            className="flex items-center gap-3.5 glass rounded-2xl p-4 border border-white/10 hover:border-amber-400/40 transition-all group">
-                            <div className="shrink-0 w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center">
-                              <span className="material-symbols-outlined text-lg text-amber-400">restaurant</span>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <p className="font-sans-body text-sm font-bold text-white group-hover:text-amber-300 transition-colors">{r.name}</p>
-                                <span className="font-sans-body text-[10px] text-slate-300 glass px-2 py-0.5 rounded-md border border-white/10">{r.priceRange}</span>
-                              </div>
-                              <p className="font-sans-body text-xs text-slate-400 mb-1">{r.type} · {r.distance}</p>
-                              <StarRating rating={r.rating} />
-                            </div>
-                            <span className="material-symbols-outlined text-sm text-slate-500 group-hover:text-amber-400 transition-colors shrink-0">open_in_new</span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-              </div>
-            </div>
-          ) : (
-            <div className="glass-panel rounded-3xl border border-white/10 shadow-2xl p-10 flex flex-col items-center justify-center text-center min-h-[400px] gap-4">
-              <span className="material-symbols-outlined text-6xl text-slate-600">calendar_month</span>
-              <h3 className="font-serif-headline text-2xl font-bold text-white">Select a Festival Date</h3>
-              <p className="font-sans-body text-sm text-slate-400 max-w-sm">
-                Click any highlighted date on the calendar, or pick an event from the list below to explore its history, what happens, and where to stay nearby.
-              </p>
-              {monthFestivals.length === 0 && (
-                <p className="font-sans-body text-xs text-cyan-400 font-bold mt-2">← Use the month shortcuts above to jump to active festival months</p>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* All Festivals Grid */}
-      <section className="mt-14">
-        <div className="text-center mb-8">
-          <span className="font-sans-body text-xs font-bold uppercase tracking-widest text-amber-400">Complete Directory</span>
-          <h2 className="font-serif-headline text-3xl font-bold text-white mt-1">All Major Festivals of Nepal</h2>
-          <p className="font-sans-body text-sm text-slate-400 mt-1">Click any card below to view detailed image galleries and festival guides.</p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-          {FESTIVALS_SORTED.map(f => (
-            <button key={f.id} onClick={() => selectFestival(f)}
-              className="glass-card glass-card-hover rounded-2xl p-4 border border-white/10 text-left flex items-center gap-3.5 cursor-pointer transition-all hover:border-amber-400/50 group">
-              <div className="shrink-0 w-16 h-16 rounded-xl overflow-hidden border border-white/10 relative">
-                <img src={f.imageUrl} alt={f.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-black/30" />
-                <span className="absolute bottom-1 right-1 font-serif-headline text-xs font-bold text-amber-300 drop-shadow">
-                  {MONTH_NAMES[f.month].slice(0,3)}
-                </span>
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-sans-body text-sm font-bold text-white truncate group-hover:text-amber-300 transition-colors">{f.name}</p>
-                <p className="font-sans-body text-[11px] text-amber-400 font-semibold mb-0.5 truncate">{f.category}</p>
-                <p className="font-sans-body text-[11px] text-slate-400 flex items-center gap-1 truncate">
-                  <span className="material-symbols-outlined text-xs text-slate-500">location_on</span>
-                  {f.isNationwide ? '🇳🇵 Nationwide' : f.location}
-                </p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Full Screen Image Modal */}
-      {modalImage && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4" onClick={() => setModalImage(null)}>
-          <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl border border-white/20 shadow-2xl" onClick={e => e.stopPropagation()}>
-            <img src={modalImage} alt="Enlarged view" className="w-full h-full object-contain max-h-[85vh]" />
-            <button
-              onClick={() => setModalImage(null)}
-              className="absolute top-3 right-3 bg-black/60 hover:bg-black p-2 rounded-full text-white border border-white/20 transition-all cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-xl">close</span>
-            </button>
-          </div>
-        </div>
-      )}
-
-    </div>
-  );
-};
+if start_idx != -1 and end_idx != -1:
+    updated = content[:start_idx] + new_festivals_code + '\n\n' + content[end_idx:]
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(updated)
+    print('Updated CalendarPage.tsx successfully!')
+else:
+    print('Indices not found:', start_idx, end_idx)
